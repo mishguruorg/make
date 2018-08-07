@@ -1,6 +1,6 @@
 {
   "name": "@mishguru/make",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Make a new row for any database table",
   "main": "dist/index.js",
   "scripts": {
