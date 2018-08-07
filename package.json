@@ -1,0 +1,33 @@
+{
+  "name": "@mishguru/make",
+  "version": "1.0.0",
+  "description": "Make a new row for any database table",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test_local pkg-test",
+    "build": "pkg-build",
+    "lint": "pkg-lint",
+    "tidy": "pkg-tidy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mishguruorg/make.git"
+  },
+  "keywords": [
+    "make"
+  ],
+  "author": "Mish Guru <devs@mish.guru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mishguruorg/make/issues"
+  },
+  "homepage": "https://github.com/mishguruorg/make#readme",
+  "devDependencies": {
+    "@mishguru/data": "128.0.3",
+    "@mishguru/package": "4.11.0",
+    "@mishguru/test-helpers": "4.0.1"
+  },
+  "dependencies": {
+    "faker": "4.1.0"
+  }
+}

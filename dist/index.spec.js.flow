@@ -1,0 +1,78 @@
+import test from 'ava'
+import db from '@mishguru/data'
+import { bindLifecycle } from '@mishguru/test-helpers'
+
+import make from './index'
+
+bindLifecycle(test, db)
+
+test('make a user', async (t) => {
+  const user = await make({ db, context: t.context, table: db.User })
+  t.truthy(user)
+
+  t.truthy(t.context.user)
+})
+
+test('make a snapchat account', async (t) => {
+  const scAccount = await make({
+    db,
+    context: t.context,
+    table: db.SnapchatAccount
+  })
+  t.truthy(scAccount)
+
+  t.truthy(t.context.user)
+  t.truthy(t.context.snapchatAccount)
+})
+
+test('make a follower', async (t) => {
+  const follower = await make({
+    db,
+    context: t.context,
+    table: db.Follower
+  })
+  t.truthy(follower)
+
+  t.truthy(t.context.follower)
+})
+
+test('make a user follower', async (t) => {
+  const userFollower = await make({
+    db,
+    context: t.context,
+    table: db.UserFollower
+  })
+  t.truthy(userFollower)
+
+  t.truthy(t.context.user)
+  t.truthy(t.context.follower)
+  t.truthy(t.context.userFollower)
+})
+
+test('make a content', async (t) => {
+  const content = await make({
+    db,
+    context: t.context,
+    table: db.Content
+  })
+  t.truthy(content)
+
+  t.truthy(t.context.user)
+  t.truthy(t.context.content)
+})
+
+test('make a receivedSnap', async (t) => {
+  const receivedSnap = await make({
+    db,
+    context: t.context,
+    table: db.ReceivedSnap
+  })
+  t.truthy(receivedSnap)
+
+  t.truthy(t.context.blobInfo)
+  t.truthy(t.context.content)
+  t.truthy(t.context.follower)
+  t.truthy(t.context.receivedSnap)
+  t.truthy(t.context.user)
+  t.truthy(t.context.userFollower)
+})
