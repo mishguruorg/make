@@ -34,7 +34,7 @@ test('my test', (t) => {
 
 *Short form with AVA helper (recommended):*
 
-```
+```javascript
 const test = require('ava')
 const { db } = require('@mishguru/make')
 const { withMake } = require('@mishguru/make')
