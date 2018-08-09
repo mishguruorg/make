@@ -63,3 +63,38 @@ test('make a receivedSnap', async (t) => {
   t.truthy(t.context.user)
   t.truthy(t.context.userFollower)
 })
+
+test('make an instagramReceivedSnap', async (t) => {
+  const { make } = t.context
+  const instagramReceivedSnap = await make(db.InstagramReceivedSnaps)
+  t.truthy(instagramReceivedSnap)
+  
+  t.truthy(t.context.content)
+  t.truthy(t.context.instagramAccountFollower)
+  t.truthy(t.context.instagramAccount)
+})
+
+test('make an Instagram account', async (t) => {
+  const { make } = t.context
+  const instagramAccount = await make(db.InstagramAccount)
+  t.truthy(instagramAccount)
+
+  t.truthy(t.context.user)
+})
+
+test('make an Instagram account follower', async (t) => {
+  const { make } = t.context
+  const instagramAccountFollower = await make(db.InstagramAccountFollower)
+  t.truthy(instagramAccountFollower)
+
+  t.truthy(t.context.instagramAccount)
+  t.truthy(t.context.instagramFollower)
+})
+
+test('make an Instagram follower', async (t) => {
+  const { make } = t.context
+  const instagramFollower = await make(db.InstagramFollower)
+  t.truthy(instagramFollower)
+
+  t.truthy(t.context.instagramAccount)
+})
