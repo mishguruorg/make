@@ -17,11 +17,11 @@ You do not have a choice which values it will set, and you should not care
 about that. 
 
 If your test requires a specific value to be a in a column, for example, that
-`archived = true`, then you should explicity set that in your test.
+`url = 'https://mish.guru'`, then you should explicity set that in your test.
 
 ```javascript
 const content = await make(db.Content)
-await content.update({ archived: true })
+await content.update({ url: 'https://mish.guru' })
 ```
 
 ### Relations
@@ -108,10 +108,19 @@ withMake({ test, db })
 test('Query receivedSnaps for a Snapchat Account', async (t) => {
   const { scAccount } = t.context
 
-  const firstContent = await createTestContent(db, { path: 'http://test.com' })
-  const firstSnap = await createTestReceivedSnap(db, { scAccountId: scAccount.id, archived: false, contentId: firstContent.id, sentAt: moment() })
-  const secondContent = await createTestContent(db, { path: 'http://test2.com' })
-  const secondSnap = await createTestReceivedSnap(db, { scAccountId: scAccount.id, archived: false, contentId: secondContent.id, sentAt: moment().subtract(10, 'day') })
+  await make(db.BlobInfo)
+  const firstContent = await make(db.Content)
+  await firstContent.update({ path: 'http://test.com' })
+
+  const firstSnap = await make(db.ReceivedSnap)
+  await secondSnap.update({ sentAt: moment() })
+
+  await make(db.BlobInfo)
+  const secondContent = await make(db.Content)
+  await secondContent.update({ path: 'http://test2.com'} )
+
+  const secondSnap = await make(db.ReceivedSnap)
+  await secondSnap.update({ sentAt: moment().subtract(10, 'day') })
 
   const query = `
     query ReceivedSnaps {

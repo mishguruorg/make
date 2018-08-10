@@ -17,14 +17,14 @@ const resolveRequiredForeignKeys = async ({ db, context, template }) => {
   for (const key in template.foreignKeys) {
     const [tableName, column] = template.foreignKeys[key]
     const table = findTableByName({ db, tableName })
-    const row = await make({ db, context, table })
+    const row = await make({ db, context, table, reuseIfPossible: true })
     foreignKeys[key] = row[column]
   }
   return foreignKeys
 }
 
 const make = async (options) => {
-  const { db, context, table } = options
+  const { db, context, table, reuseIfPossible } = options
   const { name } = table
 
   if (allTables.hasOwnProperty(name) === false) {
@@ -32,7 +32,8 @@ const make = async (options) => {
   }
 
   const template = allTables[name]()
-  if (context.hasOwnProperty(template.key)) {
+
+  if (reuseIfPossible && context.hasOwnProperty(template.key)) {
     return context[template.key]
   }
 

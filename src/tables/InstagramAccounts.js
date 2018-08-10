@@ -14,7 +14,7 @@ const table = () => ({
     authCookie: faker.random.alphaNumeric(20),
     deviceHexCode: faker.random.alphaNumeric(20),
     loggedInAt: faker.helpers.randomize([null, faker.date.past()]),
-    guid: faker.random.uuid,
+    guid: faker.random.uuid(),
     csrfToken: faker.random.alphaNumeric(20),
     captureSnaps: faker.date.past(),
     liveAt: faker.date.past()

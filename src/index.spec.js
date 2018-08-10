@@ -74,7 +74,7 @@ test('make an instagramReceivedSnap', async (t) => {
   t.truthy(t.context.instagramAccount)
 })
 
-test('make an Instagram account', async (t) => {
+test('make an instagramAccount', async (t) => {
   const { make } = t.context
   const instagramAccount = await make(db.InstagramAccount)
   t.truthy(instagramAccount)
@@ -82,7 +82,7 @@ test('make an Instagram account', async (t) => {
   t.truthy(t.context.user)
 })
 
-test('make an Instagram account follower', async (t) => {
+test('make an instagramAccountFollower', async (t) => {
   const { make } = t.context
   const instagramAccountFollower = await make(db.InstagramAccountFollower)
   t.truthy(instagramAccountFollower)
@@ -91,10 +91,27 @@ test('make an Instagram account follower', async (t) => {
   t.truthy(t.context.instagramFollower)
 })
 
-test('make an Instagram follower', async (t) => {
+test('make an instagramFollower', async (t) => {
   const { make } = t.context
   const instagramFollower = await make(db.InstagramFollower)
   t.truthy(instagramFollower)
 
   t.truthy(t.context.instagramAccount)
+})
+
+test('make two contents and two receivedSnaps', async (t) => {
+  const { make } = t.context
+  await make(db.BlobInfo)
+  const firstContent = await make(db.Content)
+  const firstSnap = await make(db.ReceivedSnap)
+
+  await make(db.BlobInfo)
+  const secondContent = await make(db.Content)
+  const secondSnap = await make(db.ReceivedSnap)
+
+  t.is(firstSnap.contentId, firstContent.id)
+  t.is(secondSnap.contentId, secondContent.id)
+
+  t.not(firstContent.id, secondContent.id)
+  t.not(firstSnap.id, secondSnap.id)
 })
