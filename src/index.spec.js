@@ -118,7 +118,6 @@ test('make two contents and two receivedSnaps', async (t) => {
 
 test('make an Instagram thread item', async (t) => {
   const { make } = t.context
-  debugger
   const instagramThreadItem = await make(db.InstagramThreadItems)
 
   t.truthy(instagramThreadItem)
