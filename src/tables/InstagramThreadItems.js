@@ -15,8 +15,7 @@ const table = () => ({
         itemId: faker.random.alphaNumeric(20),
         unixTimestamp: faker.random.number(),
         itemType: faker.random.alphaNumeric(12),
-        seenCount: faker.random.number(),
-
+        seenCount: faker.random.number()
     }
 })
 

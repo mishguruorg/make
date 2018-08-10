@@ -7,6 +7,7 @@ const table = () => ({
   tableName: 'IG_ReceivedSnaps',
   foreignKeys: {
     instagramAccountId: ['InstagramAccounts', 'id'],
+    instagramAccountFollowerId: ['IG_AccountFollower', 'id'],
     contentId: ['Content', 'id'],
     itemId: ['IG_ThreadItems', 'itemId']
   },
