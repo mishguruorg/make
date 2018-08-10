@@ -89,23 +89,34 @@ _Note: this example is not accurate yet_
 ``` javascript
 import db from '@mishguru/data'
 import test from 'ava'
+import moment from 'moment'
 
 import { bindLifecycle } from '@mishguru/test-helpers'
 import { withMake } from '@mishguru/make'
 
+import { toGlobalId } from '../../../relay'
 import * as graphql from '../../../testHelpers/graphql'
+
+import { createTestContent } from '../../../testHelpers/integrationTestHelpers/createTestContent'
+
+import { createTestReceivedSnap } from '../../../testHelpers/integrationTestHelpers/createTestReceivedSnap'
 
 bindLifecycle(test, db)
 withMake({ test, db })
 
-test('Query basic user stories from both Instagram and Snapchat', async (t) => {
-  const { make, instagramAccount } = t.context
-  const firstSnap = await make(db.InstagramReceivedSnaps)
-  const secondSnap = await make(db.InstagramReceivedSnaps)
+
+test('Query receivedSnaps for a Snapchat Account', async (t) => {
+  const { scAccount } = t.context
+
+  const firstContent = await createTestContent(db, { path: 'http://test.com' })
+  const firstSnap = await createTestReceivedSnap(db, { scAccountId: scAccount.id, archived: false, contentId: firstContent.id, sentAt: moment() })
+  const secondContent = await createTestContent(db, { path: 'http://test2.com' })
+  const secondSnap = await createTestReceivedSnap(db, { scAccountId: scAccount.id, archived: false, contentId: secondContent.id, sentAt: moment().subtract(10, 'day') })
+
   const query = `
     query ReceivedSnaps {
       viewer {
-        receivedSnaps (first: 1, accountIds: ["InstagramAccount:${instagramAccount.id}"]) {
+        receivedSnaps (first: 2, accountIds: ["SnapchatAccount:${scAccount.id}"]) {
           totalCount
           nodes {
             id
@@ -126,13 +137,13 @@ test('Query basic user stories from both Instagram and Snapchat', async (t) => {
               content: {
                 url: 'http://test.com'
               },
-              id: 'InstagramReceivedSnap:1'
+              id: toGlobalId('SnapchatReceivedSnap', firstSnap.id)
             },
             {
               content: {
                 url: 'http://test2.com'
               },
-              id: 'InstagramReceivedSnap:2'
+              id: toGlobalId('SnapchatReceivedSnap', secondSnap.id)
             }
           ],
           totalCount: 2
@@ -141,5 +152,6 @@ test('Query basic user stories from both Instagram and Snapchat', async (t) => {
     }
   }
 
-  const fullResult = await graphql.execAndCompare({ t, query, expectedResult })
+  await graphql.execAndCompare({ t, query, expectedResult })
+})
 ```
