@@ -6,7 +6,7 @@ const table = () => ({
   key: 'instagramAccount',
   tableName: 'InstagramAccounts',
   foreignKeys: {
-    userId: ['Users', 'id'],
+    userId: ['Users', 'id']
   },
   columns: {
     username: faker.internet.userName(),

@@ -19,8 +19,8 @@ const table = () => ({
     viewMode: Math.random() > 0.5 ? 'visual_media' : 'view_mode',
     sentAt: faker.date.past(),
     archived: false
-  },
-  
+  }
+
 })
 
 export default table

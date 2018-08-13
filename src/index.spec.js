@@ -68,7 +68,7 @@ test('make an instagramReceivedSnap', async (t) => {
   const { make } = t.context
   const instagramReceivedSnap = await make(db.InstagramReceivedSnaps)
   t.truthy(instagramReceivedSnap)
-  
+
   t.truthy(t.context.content)
   t.truthy(t.context.instagramAccountFollower)
   t.truthy(t.context.instagramAccount)
