@@ -7,7 +7,9 @@
     "test": "NODE_ENV=test_local pkg-test",
     "build": "pkg-build",
     "lint": "pkg-lint",
-    "tidy": "pkg-tidy"
+    "tidy": "pkg-tidy",
+    "prepublish": "pkg-build",
+    "postpublish": "git push origin master --tags;"
   },
   "repository": {
     "type": "git",
