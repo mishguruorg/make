@@ -13,15 +13,12 @@
 ### Mock Data
 
 When creating a row with `make`, it will fill it with appropriate fake data.
-You do not have a choice which values it will set, and you should not care
-about that. 
 
 If your test requires a specific value to be a in a column, for example, that
-`url = 'https://mish.guru'`, then you should explicity set that in your test.
+`url = 'https://mish.guru'`, then you can pass custom fields you want to use as second argument.
 
 ```javascript
-const content = await make(db.Content)
-await content.update({ url: 'https://mish.guru' })
+const content = await make(db.Content, { url: 'https://mish.guru' })
 ```
 
 ### Relations
