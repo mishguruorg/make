@@ -125,3 +125,13 @@ test('make an Instagram thread item', async (t) => {
   t.truthy(t.context.instagramAccount)
   t.truthy(t.context.instagramAccountFollower)
 })
+
+test('able to set custome fields', async (t) => {
+  const { make } = t.context
+  const content = await make(db.Content, { width: 999 })
+  t.truthy(content)
+
+  t.truthy(t.context.user)
+  t.truthy(t.context.content)
+  t.is(t.context.content.width, 999)
+})

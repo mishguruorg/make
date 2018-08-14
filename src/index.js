@@ -24,7 +24,7 @@ const resolveRequiredForeignKeys = async ({ db, context, template }) => {
 }
 
 const make = async (options) => {
-  const { db, context, table, reuseIfPossible } = options
+  const { db, context, table, reuseIfPossible, customField = {} } = options
   const { name } = table
 
   if (allTables.hasOwnProperty(name) === false) {
@@ -45,7 +45,8 @@ const make = async (options) => {
 
   const row = await table.create({
     ...template.columns,
-    ...foreignKeys
+    ...foreignKeys,
+    ...customField
   })
 
   context[template.key] = row
@@ -55,11 +56,12 @@ const make = async (options) => {
 
 const withMake = ({ test, db }) => {
   test.serial.beforeEach((t) => {
-    t.context.make = (table) => {
+    t.context.make = (table, customField) => {
       return make({
         db,
         context: t.context,
-        table
+        table,
+        customField
       })
     }
   })
