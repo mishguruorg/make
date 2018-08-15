@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 10.6.0
+
+dependencies:
+  pre:
+    - echo $NPMRC > ~/.npmrc
+  override:
+    - npm ci
+
+test:
+  override:
+    - npm run lint
+    - npm run test

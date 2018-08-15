@@ -9,8 +9,8 @@ const table = () => ({
     instagramStoryPostId: ['InstagramStories', 'id'],
     instagramAccountId: ['InstagramAccounts', 'id'],
     contentId: ['Content', 'id'],
-    instagramSnapGroupId: ['InstagramSnapGroups', 'id'],
-   // previousInstagramSnapId: ['InstagramSnaps', 'id']
+    instagramSnapGroupId: ['InstagramSnapGroups', 'id']
+    // previousInstagramSnapId: ['InstagramSnaps', 'id']
   },
   columns: {
     createdAt: faker.date.past(),
