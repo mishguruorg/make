@@ -7,7 +7,7 @@ const table = () => ({
   tableName: 'InstagramStories',
   foreignKeys: {
     instagramAccountId: ['InstagramAccounts', 'id'],
-    contentId: ['Content', 'id'],
+    contentId: ['Content', 'id']
   },
   columns: {
     createdAt: faker.date.past(),

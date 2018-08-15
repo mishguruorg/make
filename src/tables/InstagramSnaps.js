@@ -10,16 +10,16 @@ const table = () => ({
     instagramAccountId: ['InstagramAccounts', 'id'],
     contentId: ['Content', 'id'],
     instagramSnapGroupId: ['InstagramSnapGroups', 'id'],
-    previousInstagramSnapId: ['InstagramSnaps', 'id']
+   // previousInstagramSnapId: ['InstagramSnaps', 'id']
   },
   columns: {
     createdAt: faker.date.past(),
     updatedAt: faker.date.past(),
     postedToStoryAt: faker.date.past(),
-    duration: faker.random.number({ max: 10 })
-    viewerCountOnStory: faker.random.number({ max: 1000 })
-    instagramSnapGroupOrder: faker.random.number({ max: 1000 })
-    attemptedToPostCount: faker.random.number({ max: 3 })
+    duration: faker.random.number({ max: 10 }),
+    viewerCountOnStory: faker.random.number({ max: 1000 }),
+    instagramSnapGroupOrder: faker.random.number({ max: 1000 }),
+    attemptedToPostCount: faker.random.number({ max: 3 }),
     lastPostAttempt: faker.date.past(),
     isLive: faker.random.boolean(),
     isScheduled: faker.random.boolean(),
