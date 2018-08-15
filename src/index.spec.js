@@ -135,3 +135,34 @@ test('able to set custome fields', async (t) => {
   t.truthy(t.context.content)
   t.is(t.context.content.width, 999)
 })
+
+test('make an Instagram snap', async (t) => {
+  const { make } = t.context
+  const instagramSnap = await make(db.InstagramSnap, { viewerCountOnStory: 123 })
+  t.truthy(instagramSnap)
+
+  t.truthy(t.context.instagramStory)
+  t.truthy(t.context.instagramAccount)
+  t.truthy(t.context.instagramSnapGroup)
+  t.truthy(t.context.content)
+  t.is(t.context.instagramSnap.viewerCountOnStory, 123)
+})
+
+test('make an Instagram snap group', async (t) => {
+  const { make } = t.context
+  const instagramSnapGroup = await make(db.InstagramSnapGroup, { name: 'fake name' })
+  t.truthy(instagramSnapGroup)
+
+  t.truthy(t.context.instagramAccount)
+  t.is(t.context.instagramSnapGroup.name, 'fake name')
+})
+
+test('make an Instagram story', async (t) => {
+  const { make } = t.context
+  const instagramStory = await make(db.InstagramStory, { name: 'fake name' })
+  t.truthy(instagramStory)
+
+  t.truthy(t.context.instagramAccount)
+  t.truthy(t.context.content)
+  t.is(t.context.instagramStory.name, 'fake name')
+})
