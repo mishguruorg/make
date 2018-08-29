@@ -4,7 +4,7 @@ import faker from 'faker'
 import db from '@mishguru/data'
 
 const table = () => ({
-  key: 'snapchatAccount',
+  key: 'scAccount',
   tableName: 'SC_Account',
   foreignKeys: {
     userId: ['Users', 'id']

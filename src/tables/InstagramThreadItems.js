@@ -3,7 +3,7 @@
 import faker from 'faker'
 
 const table = () => ({
-  key: 'InstagramThreadItem',
+  key: 'instagramThreadItem',
   tableName: 'IG_ThreadItems',
   foreignKeys: {
     instagramAccountId: ['InstagramAccounts', 'id'],

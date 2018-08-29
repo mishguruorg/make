@@ -3,7 +3,7 @@
 import faker from 'faker'
 
 const table = () => ({
-  key: 'InstagramReceivedSnap',
+  key: 'instagramReceivedSnap',
   tableName: 'IG_ReceivedSnaps',
   foreignKeys: {
     instagramAccountId: ['InstagramAccounts', 'id'],
@@ -20,7 +20,6 @@ const table = () => ({
     sentAt: faker.date.past(),
     archived: false
   }
-
 })
 
 export default table

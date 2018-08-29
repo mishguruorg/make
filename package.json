@@ -4,6 +4,8 @@
   "description": "Make a new row for any database table",
   "main": "dist/index.js",
   "scripts": {
+    "precommit": "pkg-precommit",
+    "tidy": "pkg-tidy",
     "test": "NODE_ENV=test_local pkg-test",
     "build": "pkg-build",
     "lint": "pkg-lint",
@@ -25,8 +27,8 @@
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/data": "131.1.0",
-    "@mishguru/package": "4.11.0",
+    "@mishguru/data": "135.0.0",
+    "@mishguru/package": "4.14.0",
     "@mishguru/test-helpers": "4.0.1"
   },
   "dependencies": {

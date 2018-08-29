@@ -67,7 +67,4 @@ const withMake = ({ test, db }) => {
   })
 }
 
-export {
-  make,
-  withMake
-}
+export { make, withMake }
