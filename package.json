@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/data": "135.0.0",
-    "@mishguru/package": "4.14.0",
+    "@mishguru/data": "141.0.0",
+    "@mishguru/package": "4.16.0",
     "@mishguru/test-helpers": "4.0.1"
   },
   "dependencies": {

@@ -21,7 +21,7 @@ test('make a snapchat account', async (t) => {
   t.truthy(scAccount)
 
   t.truthy(t.context.user)
-  t.truthy(t.context.snapchatAccount)
+  t.truthy(t.context.scAccount)
 })
 
 test('make a follower', async (t) => {
