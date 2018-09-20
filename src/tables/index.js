@@ -16,6 +16,7 @@ import IG_AccountFollower from './InstagramAccountFollowers'
 import IG_Follower from './InstagramFollowers'
 import IG_ReceivedSnaps from './InstagramReceivedSnaps'
 import IG_ThreadItems from './InstagramThreadItems'
+import Uploads from './Uploads'
 
 export {
   BlobInfo,
@@ -32,5 +33,6 @@ export {
   IG_ReceivedSnaps,
   Users,
   UserFollowers,
-  IG_ThreadItems
+  IG_ThreadItems,
+  Uploads
 }
