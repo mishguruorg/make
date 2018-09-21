@@ -51,6 +51,16 @@ test('make a content', async (t) => {
   t.truthy(t.context.content)
 })
 
+test('make an Upload', async (t) => {
+  const { make } = t.context
+  const upload = await make(db.Upload)
+  t.truthy(upload)
+
+  t.truthy(t.context.user)
+  t.truthy(t.context.content)
+  t.truthy(t.context.upload)
+})
+
 test('make a receivedSnap', async (t) => {
   const { make } = t.context
   const receivedSnap = await make(db.ReceivedSnap)

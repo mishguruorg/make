@@ -9,6 +9,7 @@
     "test": "NODE_ENV=test_local pkg-test",
     "build": "pkg-build",
     "lint": "pkg-lint",
+    "flow": "pkg-flow",
     "prepublish": "pkg-build",
     "postpublish": "git push origin master --tags;"
   },
@@ -26,9 +27,9 @@
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/data": "141.0.0",
-    "@mishguru/package": "4.16.0",
-    "@mishguru/test-helpers": "4.0.1"
+    "@mishguru/data": "143.1.0",
+    "@mishguru/package": "4.17.0",
+    "@mishguru/test-helpers": "4.1.0"
   },
   "dependencies": {
     "faker": "4.1.0"
