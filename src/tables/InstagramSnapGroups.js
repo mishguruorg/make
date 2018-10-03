@@ -13,7 +13,7 @@ const table = () => ({
     updatedAt: faker.date.past(),
     name: `${faker.name.findName()}'s snap group`,
     scheduledDate: faker.date.past(),
-    archived: faker.random.boolean()
+    archived: false
   }
 })
 

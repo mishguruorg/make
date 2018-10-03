@@ -180,3 +180,17 @@ test('make an Instagram story', async (t) => {
   t.truthy(t.context.content)
   t.is(t.context.instagramStory.name, 'fake name')
 })
+
+test('make a Snapchat Snap', async (t) => {
+  const { make } = t.context
+  const snap = await make(db.Snap)
+  t.truthy(snap)
+
+  t.truthy(t.context.content)
+})
+
+test('make a Snapchat SnapGroup', async (t) => {
+  const { make } = t.context
+  const group = await make(db.SnapGroup)
+  t.truthy(group)
+})

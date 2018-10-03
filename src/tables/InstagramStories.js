@@ -14,8 +14,8 @@ const table = () => ({
     updatedAt: faker.date.past(),
     name: `${faker.name.findName()}'s snap story`,
     storyDate: faker.date.past(),
-    archived: faker.random.boolean(),
-    uniqueKey: faker.random.uuid()
+    uniqueKey: faker.random.uuid(),
+    archived: false
   }
 })
 

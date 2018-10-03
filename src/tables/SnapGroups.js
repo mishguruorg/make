@@ -3,16 +3,16 @@
 import faker from 'faker'
 
 const table = () => ({
-  key: 'upload',
-  tableName: 'Uploads',
+  key: 'snapGroup',
+  tableName: 'SnapGroups',
   foreignKeys: {
-    userId: ['Users', 'id'],
-    contentId: ['Content', 'id']
+    scAccountId: ['SC_Account', 'id']
   },
   columns: {
     createdAt: faker.date.past(),
     updatedAt: faker.date.past(),
-    filename: faker.system.fileName(),
+    name: `${faker.name.findName()}'s snap group`,
+    scheduledDate: faker.date.past(),
     archived: false
   }
 })

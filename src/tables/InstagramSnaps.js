@@ -23,8 +23,8 @@ const table = () => ({
     lastPostAttempt: faker.date.past(),
     isLive: faker.random.boolean(),
     isScheduled: faker.random.boolean(),
-    archived: faker.random.boolean(),
-    expiringOnStoryAt: faker.date.future()
+    expiringOnStoryAt: faker.date.future(),
+    archived: false
   }
 })
 
