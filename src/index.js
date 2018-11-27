@@ -31,7 +31,7 @@ const make = async (options) => {
     throw new Error(`No table definition exists for "${name}"`)
   }
 
-  const template = allTables[name]()
+  const template = allTables[name](db)
 
   if (reuseIfPossible && context.hasOwnProperty(template.key)) {
     return context[template.key]
