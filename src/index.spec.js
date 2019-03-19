@@ -194,3 +194,15 @@ test('make a Snapchat SnapGroup', async (t) => {
   const group = await make(db.SnapGroup)
   t.truthy(group)
 })
+
+test('make a Tag', async (t) => {
+  const { make } = t.context
+  const tag = await make(db.Tag)
+  t.truthy(tag)
+})
+
+test('make a ContentTag', async (t) => {
+  const { make } = t.context
+  const contentTag = await make(db.ContentTag)
+  t.truthy(contentTag)
+})
