@@ -1,37 +1,45 @@
 {
   "name": "@mishguru/make",
   "version": "2.3.0",
-  "description": "Make a new row for any database table",
+  "description": "Easily make rows for any Sequelize model, that are filled with mock data.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "precommit": "pkg-precommit",
     "tidy": "pkg-tidy",
-    "test": "NODE_ENV=test_local pkg-test",
     "build": "pkg-build",
     "lint": "pkg-lint",
-    "flow": "pkg-flow",
-    "prepublish": "pkg-build",
-    "postpublish": "git push origin master --tags;"
+    "test": "NODE_ENV=test pkg-test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mishguruorg/make.git"
   },
   "keywords": [
-    "make"
+    "make",
+    "sequelize",
+    "fake",
+    "mock",
+    "data"
   ],
-  "author": "Mish Guru <devs@mish.guru>",
+  "author": "Mish Guru <dev@mish.guru>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mishguruorg/make/issues"
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/data": "184.0.0",
-    "@mishguru/package": "6.0.0-next.28",
-    "@mishguru/test-helpers": "5.0.3"
+    "@mishguru/package": "6.0.0",
+    "@types/faker": "4.1.5",
+    "@types/matcher": "1.1.0",
+    "@types/sequelize": "3.30.9",
+    "@types/sinon": "7.0.11",
+    "mysql": "2.17.0",
+    "sequelize": "3.34.0",
+    "sinon": "7.3.2"
   },
   "dependencies": {
-    "faker": "4.1.0"
+    "faker": "4.1.0",
+    "matcher": "1.1.1"
   }
 }
