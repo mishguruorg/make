@@ -14,6 +14,11 @@ const createKeyFromEntityName = (entityName: string) => {
 }
 
 const fakeColumn = (table: Table, field: string, type: any) => {
+  // ENUM
+  if (type.values != null) {
+    return faker.random.arrayElement(type.values)
+  }
+
   const dbType = type.constructor.types.sqlite[0]
 
   switch (dbType) {

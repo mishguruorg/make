@@ -13,11 +13,15 @@ const Account = sequelize.import('Account', (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       timezone: DataTypes.STRING,
 
+      archived: DataTypes.BOOLEAN,
+
       integer: DataTypes.INTEGER,
       float: DataTypes.FLOAT,
       text: DataTypes.TEXT,
       bool: DataTypes.BOOLEAN,
       bigInt: DataTypes.BIGINT,
+
+      type: DataTypes.ENUM('A', 'B', 'C'),
     },
     {
       tableName: 'Table_Account',

@@ -27,3 +27,24 @@ test('should extract foreignKeys', async (t) => {
     },
   })
 })
+
+test('should extract columns', async (t) => {
+  const template = autotemplate(Account)
+  t.is(typeof template.columns.email, 'string')
+  t.is(typeof template.columns.username, 'string')
+  t.is(typeof template.columns.password, 'string')
+  t.is(typeof template.columns.firstName, 'string')
+  t.is(typeof template.columns.lastName, 'string')
+  t.is(typeof template.columns.timezone, 'string')
+  t.is(typeof template.columns.integer, 'number')
+  t.is(typeof template.columns.float, 'number')
+  t.is(typeof template.columns.text, 'string')
+  t.is(typeof template.columns.bool, 'number')
+  t.is(typeof template.columns.bigInt, 'number')
+  t.is(typeof template.columns.type, 'string')
+})
+
+test('archived column should always be false', (t) => {
+  const template = autotemplate(Account)
+  t.is(template.columns.archived, 0)
+})
