@@ -1,37 +1,10 @@
 # Make
 
-> Create test data for any table with ease
+> Easily create rows for any table
 
-## Goals
+Built for Sequelize v3 and AVA.
 
-1. Let's open source it!
-2. Don't hard code it to our database. Sequelize should be the minimum
-   requirement.
-
-## Testing Philosophy
-
-### Mock Data
-
-When creating a row with `make`, it will fill it with appropriate fake data.
-
-If your test requires a specific value to be a in a column, for example, that
-`url = 'https://mish.guru'`, then you can pass custom fields you want to use as second argument.
-
-```javascript
-const content = await make(db.Content, { url: 'https://mish.guru' })
-```
-
-### Relations
-
-`make` will handle foreign keys for you. If you want to create a
-`ReceivedSnap`, then a `User`, `SnapchatAccount`, `Content`, `BlobInfo`,
-`Follower`, and `UserFollower` will all be created for you as well.
-
-```
-const receivedSnap = await make(db.ReceivedSnap)
-```
-
-## Installation
+## Install
 
 ```shell
 npm install --save-dev @mishguru/make
@@ -39,125 +12,152 @@ npm install --save-dev @mishguru/make
 
 ## Usage
 
-*Long form:*
+### Manual
+
+```typescript
+import { make } from '@mishguru/make'
+
+import db from './db'
+
+const context = {}
+
+const task = await make({
+  context,
+  table: db.Task,
+  attributes: {
+    // optionally set custom attributes
+    name: 'task with this specific name'
+  }
+})
+```
+
+### With AVA Context
+
+If you are using AVA, then you can use `withMake` -- which automatically
+injects itself into the test context.
+
+```typescript
+import anyTest, { TestInterface } from 'ava'
+import { withMake, WithMakeFn } from '@mishguru/make'
+
+const test = anyTest as TestInterface<{ make: WithMakeFn }>
+
+withMake({ test })
+
+test('my test', async (t) => {
+  const { make } = t.context
+
+  const task = make(db.Task)
+
+  // create multiple tasks
+  const tasks = [
+    await make(db.Task),
+    await make(db.Task),
+    await make(db.Task),
+  ])
+
+  // custom attributes
+  const specialTask = make(db.Task, { name: 'special' })
+})
+```
+
+### Mock Data
+
+When creating a row with `make`, it will fill it with appropriate fake data.
+
+If your test requires a specific value to be a in a column, for example, that
+`url = 'https://mish.guru'`, then you can pass custom fields you want to use as
+second argument.
 
 ```javascript
-const test = require('ava')
-const db = require('@mishguru/data')
-const { make } = require('@mishguru/make')
+// make
+const content = await make({
+  context: {},
+  table: db.Content,
+  attributes: { url: 'https://mish.guru' }
+})
 
-test('my test', (t) => {
-  const receivedSnap = await make({
-    db,
-    context: t.context,
-    table: db.ReceivedSnap
+// withMake
+const content = await t.context.make(db.Content, { url: 'https://mish.guru' })
+```
+
+### Relations
+
+This is where `make` shines. It automatically detects foreign keys and will
+recursively create related tables for you.
+
+For example, imagine you had a database with the following entities:
+
+```
+[Task] >---| [Project] >---| [User]
+
+Task.belongsTo(Project)
+Project.belongsTo(User)
+```
+
+With make, you can create a `Task` in one line, and don't need to worry about
+setting up a `User` and a `Project`.
+
+```typescript
+const context = {}
+const task = await make({context, table: db.Task })
+
+console.log(context)
+// { task: {...}, project: {...}, user: {...} }
+```
+
+## Full Example
+
+```typescript
+import Sequelize from 'sequelize'
+import { make } from '@mishguru/make'
+
+const sequelize = new Sequelize(...)
+
+const Project = sequelize.define('project', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT
+})
+
+const Task = sequelize.define('task', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT,
+  deadline: Sequelize.DATE,
+})
+
+Task.belongsTo(Project)
+
+const start = async () => {
+  const context = {}
+
+  const task = await make({
+    context,
+    table: Task,
+    attributes: {
+      title: 'a custom title'
+    }
   })
 
-  // t.context also has the following properties added:
-  // - blobInfo
-  // - content
-  // - follower
-  // - receivedSnap
-  // - userFollower
-  // - user
-})
-```
-
-*Short form with AVA helper (recommended):*
-
-```javascript
-const test = require('ava')
-const { db } = require('@mishguru/make')
-const { withMake } = require('@mishguru/make')
-
-withMake({ test, db })
-
-test('my test', (t) => {
-  const { make } = t.context
-  const receivedSnap = await make(db.ReceivedSnap)
-  // fields also available through t.context
-})
-```
-
-## Real Life Examples
-
-_Note: this example is not accurate yet_
-
-``` javascript
-import db from '@mishguru/data'
-import test from 'ava'
-import moment from 'moment'
-
-import { bindLifecycle } from '@mishguru/test-helpers'
-import { withMake } from '@mishguru/make'
-
-import { toGlobalId } from '../../../relay'
-import * as graphql from '../../../testHelpers/graphql'
-
-import { createTestContent } from '../../../testHelpers/integrationTestHelpers/createTestContent'
-
-import { createTestReceivedSnap } from '../../../testHelpers/integrationTestHelpers/createTestReceivedSnap'
-
-bindLifecycle(test, db)
-withMake({ test, db })
-
-
-test('Query receivedSnaps for a Snapchat Account', async (t) => {
-  const { scAccount } = t.context
-
-  await make(db.BlobInfo)
-  const firstContent = await make(db.Content)
-  await firstContent.update({ path: 'http://test.com' })
-
-  const firstSnap = await make(db.ReceivedSnap)
-  await secondSnap.update({ sentAt: moment() })
-
-  await make(db.BlobInfo)
-  const secondContent = await make(db.Content)
-  await secondContent.update({ path: 'http://test2.com'} )
-
-  const secondSnap = await make(db.ReceivedSnap)
-  await secondSnap.update({ sentAt: moment().subtract(10, 'day') })
-
-  const query = `
-    query ReceivedSnaps {
-      viewer {
-        receivedSnaps (first: 2, accountIds: ["SnapchatAccount:${scAccount.id}"]) {
-          totalCount
-          nodes {
-            id
-            content {
-              url
-            }
-          }
-        }
-      }
-    }`
-
-  const expectedResult = {
-    data: {
-      viewer: {
-        receivedSnaps: {
-          nodes: [
-            {
-              content: {
-                url: 'http://test.com'
-              },
-              id: toGlobalId('SnapchatReceivedSnap', firstSnap.id)
-            },
-            {
-              content: {
-                url: 'http://test2.com'
-              },
-              id: toGlobalId('SnapchatReceivedSnap', secondSnap.id)
-            }
-          ],
-          totalCount: 2
-        }
-      }
+  console.log(context)
+  /*
+  {
+    project: {
+      id: 1,
+      title: 'District Granite Wooden',
+      description: 'e-markets Bedfordshire'
+    },
+    task: {
+      id: 1,
+      title: 'a custom title',
+      description: 'Massachusetts',
+      deadline: 2019-05-05T17:08:06.435Z,
+      projectId: 1
     }
-  }
+  }*/
 
-  await graphql.execAndCompare({ t, query, expectedResult })
-})
+  console.log(task === context.task)
+  // true
+}
+
+start().catch(console.error)
 ```
