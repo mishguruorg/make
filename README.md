@@ -61,8 +61,6 @@ test('my test', async (t) => {
 })
 ```
 
-## Testing Philosophy
-
 ### Mock Data
 
 When creating a row with `make`, it will fill it with appropriate fake data.
@@ -72,17 +70,40 @@ If your test requires a specific value to be a in a column, for example, that
 second argument.
 
 ```javascript
-const content = await make(db.Content, { url: 'https://mish.guru' })
+// make
+const content = await make({
+  context: {},
+  table: db.Content,
+  attributes: { url: 'https://mish.guru' }
+})
+
+// withMake
+const content = await t.context.make(db.Content, { url: 'https://mish.guru' })
 ```
 
 ### Relations
 
-`make` will handle foreign keys for you. If you want to create a
-`ReceivedSnap`, then a `User`, `SnapchatAccount`, `Content`, `BlobInfo`,
-`Follower`, and `UserFollower` will all be created for you as well.
+This is where `make` shines. It automatically detects foreign keys and will
+recursively create related tables for you.
+
+For example, imagine you had a database with the following entities:
 
 ```
-const receivedSnap = await make(db.ReceivedSnap)
+[Task] >---| [Project] >---| [User]
+
+Task.belongsTo(Project)
+Project.belongsTo(User)
+```
+
+With make, you can create a `Task` in one line, and don't need to worry about
+setting up a `User` and a `Project`.
+
+```typescript
+const context = {}
+const task = await make({context, table: db.Task })
+
+console.log(context)
+// { task: {...}, project: {...}, user: {...} }
 ```
 
 ## Full Example
