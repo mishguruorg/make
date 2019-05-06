@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/package": "6.1.0",
+    "@mishguru/package": "6.2.0",
     "@types/faker": "4.1.5",
     "@types/matcher": "1.1.0",
     "@types/sequelize": "3.30.9",
