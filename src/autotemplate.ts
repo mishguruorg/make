@@ -58,6 +58,8 @@ const fakeColumn = (table: Table, field: string, type: any) => {
           return faker.internet.password()
         case isMatch(field, '*timezone'):
           return faker.address.country()
+        case isMatch(field, '*id'):
+          return faker.random.uuid()
         default:
           return faker.random.words()
       }
