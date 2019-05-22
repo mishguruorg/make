@@ -46,6 +46,7 @@ const fakeColumn = (table: Table, field: string, type: any) => {
           date = faker.date.recent()
           break
       }
+      date.setMilliseconds(0)
       return date
     case 'VARCHAR':
     case 'TEXT':
