@@ -36,13 +36,18 @@ const fakeColumn = (table: Table, field: string, type: any) => {
       }
     case 'DATETIME':
     case 'DATE':
+      let date
       switch (true) {
         case isMatch(field, 'createdAt'):
         case isMatch(field, 'updatedAt'):
-          return faker.date.past()
+          date = faker.date.past()
+          break
         default:
-          return faker.date.recent()
+          date = faker.date.recent()
+          break
       }
+      date.setMilliseconds(0)
+      return date
     case 'VARCHAR':
     case 'TEXT':
       switch (true) {
