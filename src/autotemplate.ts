@@ -4,6 +4,7 @@ import { isMatch } from 'matcher'
 import { Table, Template } from './types'
 
 const createKeyFromEntityName = (entityName: string) => {
+  entityName = entityName.replace(/_/g, '')
   let prefixLength = 1
   if (entityName.match(/^\w{3}/)) {
     prefixLength = 2
