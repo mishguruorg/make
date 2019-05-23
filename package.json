@@ -41,5 +41,10 @@
   "dependencies": {
     "faker": "4.1.0",
     "matcher": "2.0.0"
+  },
+  "release-it": {
+    "scripts": {
+      "beforeStart": "npm run build"
+    }
   }
 }
