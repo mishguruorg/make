@@ -65,6 +65,8 @@ const fakeColumn = (table: Table, field: string, type: any) => {
           return faker.address.country()
         case isMatch(field, '*id'):
           return faker.random.uuid()
+        case isMatch(field, '*url'):
+          return faker.internet.url()
         default:
           return faker.random.words()
       }
