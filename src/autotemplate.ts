@@ -27,7 +27,7 @@ const fakeColumn = (table: Table, field: string, type: any) => {
     case 'BIGINT':
       return faker.random.number()
     case 'FLOAT':
-      return faker.random.number({ precision: 0.01 })
+      return faker.random.number() / 10
     case 'TINYINT':
       switch (true) {
         case isMatch(field, 'archived'):
