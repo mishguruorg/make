@@ -69,7 +69,7 @@ const fakeColumn = (table: Table, field: string, type: any) => {
         case isMatch(field, '*url'):
           return faker.internet.url()
         default:
-          return faker.random.words()
+          return faker.random.words().concat(faker.random.alphaNumeric(4))
       }
     default:
       return null
