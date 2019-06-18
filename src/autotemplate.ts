@@ -14,7 +14,7 @@ const createKeyFromEntityName = (entityName: string) => {
   return prefix + name
 }
 
-const fakeColumn = (table: Table, field: string, type: any) => {
+const fakeColumn = (field: string, type: any) => {
   // ENUM
   if (type.values != null) {
     return faker.random.arrayElement(type.values)
@@ -115,7 +115,7 @@ const autotemplate = (table: Table): Template => {
     })
     .map((attribute: any) => {
       const { field, type } = attribute
-      return [field, fakeColumn(table, field, type)]
+      return [field, fakeColumn(field, type)]
     })
     .reduce(toObject, {})
 
