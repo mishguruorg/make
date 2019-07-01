@@ -1,5 +1,6 @@
 import faker from 'faker'
 import { isMatch } from 'matcher'
+import timezones from 'tz-ids/index.json'
 
 import { Table, Template } from './types'
 
@@ -63,7 +64,7 @@ const fakeColumn = (field: string, type: any) => {
         case isMatch(field, '*password'):
           return faker.internet.password()
         case isMatch(field, '*timezone'):
-          return faker.address.country()
+          return faker.random.arrayElement(timezones)
         case isMatch(field, '*id'):
           return faker.random.uuid()
         case isMatch(field, '*url'):
