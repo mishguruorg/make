@@ -6,6 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "precommit": "pkg-precommit",
+    "prepublish": "npm run build",
+    "postpublish": "git push origin master --tags",
     "tidy": "pkg-tidy",
     "build": "pkg-build",
     "lint": "pkg-lint",
