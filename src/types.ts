@@ -1,4 +1,4 @@
-import { Transaction } from '@mishguru/data'
+import { Transaction } from 'sequelize'
 
 export type AnyAttributes = Record<string, any>
 
@@ -10,6 +10,7 @@ export type TableMap = Record<string, Table>
 
 export interface Context {
   transaction?: Transaction,
+  make?: WithMakeFn,
   [key: string]: any,
 }
 

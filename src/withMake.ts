@@ -1,18 +1,11 @@
 import { TestInterface } from 'ava'
-import { Database, Transaction } from '@mishguru/data'
 
 import make from './make'
 
-import { WithMakeFn } from './types'
-
-interface WithMakeContext {
-  make: WithMakeFn,
-  db?: Database,
-  transaction?: Transaction,
-}
+import { Context } from './types'
 
 interface Options {
-  test: TestInterface<WithMakeContext>,
+  test: TestInterface<Context>,
 }
 
 const withMake = (options: Options) => {
