@@ -46,6 +46,7 @@ test.serial(
       table: Item,
     })
 
+    t.assert(stubAccount.called)
     stubAccount.getCalls().forEach((call) => {
       t.deepEqual(call.lastArg, { transaction: stubTransaction })
     })
