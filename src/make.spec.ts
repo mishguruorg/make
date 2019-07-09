@@ -14,8 +14,12 @@ const ITEM = {
   get: sinon.stub(),
 }
 
-const stubAccount = sinon.stub(Account, 'create').resolves(ACCOUNT)
+const stubAccountCreate = sinon.stub(Account, 'create').resolves(ACCOUNT)
 sinon.stub(Item, 'create').resolves(ITEM)
+
+test.beforeEach(() => {
+  stubAccountCreate.resetHistory()
+})
 
 test.serial('should create item and account', async (t) => {
   const context = {}
@@ -36,7 +40,6 @@ test.serial('should create item and account', async (t) => {
 test.serial(
   'should pass a transaction if one is provided in context',
   async (t) => {
-    stubAccount.resetHistory()
     const stubTransaction: any = 'STUB'
     const context = {
       transaction: stubTransaction,
@@ -46,8 +49,8 @@ test.serial(
       table: Item,
     })
 
-    t.assert(stubAccount.called)
-    stubAccount.getCalls().forEach((call) => {
+    t.assert(stubAccountCreate.called)
+    stubAccountCreate.getCalls().forEach((call) => {
       t.deepEqual(call.lastArg, { transaction: stubTransaction })
     })
   },
