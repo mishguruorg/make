@@ -1,3 +1,5 @@
+import { Transaction } from '@mishguru/data'
+
 export type AnyAttributes = Record<string, any>
 
 export type AnyInstance = Record<string, any>
@@ -32,5 +34,6 @@ export type MakeFn = (options: {
   context: Context,
   table: Table,
   attributes?: Attributes,
+  transaction?: Transaction,
   reuseIfPossible?: boolean,
 }) => Promise<AnyInstance>
