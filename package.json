@@ -1,6 +1,6 @@
 {
   "name": "@mishguru/make",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Easily make rows for any Sequelize model, that are filled with mock data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
