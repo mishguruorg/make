@@ -34,7 +34,6 @@
     "@mishguru/package": "7.0.2",
     "@types/faker": "4.1.5",
     "@types/matcher": "1.1.0",
-    "@types/sequelize": "3.30.9",
     "@types/sinon": "7.0.13",
     "mysql": "2.17.1",
     "sequelize": "3.34.0",
@@ -43,6 +42,7 @@
   "dependencies": {
     "faker": "4.1.0",
     "matcher": "2.0.0",
-    "tz-ids": "1.0.0"
+    "tz-ids": "1.0.0",
+    "@types/sequelize": "3.30.9"
   }
 }
