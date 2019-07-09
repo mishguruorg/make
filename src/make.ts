@@ -7,6 +7,7 @@ const make: MakeFn = async (options) => {
   const { context, table, reuseIfPossible = false, attributes = {} } = options
 
   const template = autotemplate(table)
+  const { transaction } = context
 
   if (reuseIfPossible && context.hasOwnProperty(template.key)) {
     return context[template.key]
@@ -18,11 +19,16 @@ const make: MakeFn = async (options) => {
     template,
   })
 
-  const row = await table.create({
-    ...template.columns,
-    ...foreignKeys,
-    ...attributes,
-  })
+  const row = await table.create(
+    {
+      ...template.columns,
+      ...foreignKeys,
+      ...attributes,
+    },
+    {
+      transaction,
+    },
+  )
 
   context[template.key] = row
 

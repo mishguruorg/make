@@ -23,7 +23,11 @@ const resolveRequiredForeignKeys = async (options: Options) => {
   for (const key in template.foreignKeys) {
     const { tableName, columnName } = template.foreignKeys[key]
     const table = findTableByName({ tables, tableName })
-    const row = await make({ context, table, reuseIfPossible: true })
+    const row = await make({
+      context,
+      table,
+      reuseIfPossible: true,
+    })
     foreignKeys[key] = row.get(columnName)
   }
   return foreignKeys

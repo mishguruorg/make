@@ -1,3 +1,5 @@
+import { Transaction } from '@mishguru/data'
+
 export type AnyAttributes = Record<string, any>
 
 export type AnyInstance = Record<string, any>
@@ -6,7 +8,10 @@ export type Table = any
 
 export type TableMap = Record<string, Table>
 
-export type Context = Record<string, any>
+export interface Context {
+  transaction?: Transaction,
+  [key: string]: any,
+}
 
 export type Attributes = Record<string, any>
 
