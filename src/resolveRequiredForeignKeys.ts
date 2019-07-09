@@ -2,17 +2,15 @@ import make from './make'
 import findTableByName from './findTableByName'
 
 import { TableMap, Context, Template } from './types'
-import { Transaction } from '@mishguru/data'
 
 interface Options {
   tables: TableMap,
   context: Context,
-  transaction: Transaction,
   template: Template,
 }
 
 const resolveRequiredForeignKeys = async (options: Options) => {
-  const { tables, context, template, transaction } = options
+  const { tables, context, template } = options
 
   if (template.foreignKeys == null) {
     throw new Error(
@@ -28,7 +26,6 @@ const resolveRequiredForeignKeys = async (options: Options) => {
     const row = await make({
       context,
       table,
-      transaction,
       reuseIfPossible: true,
     })
     foreignKeys[key] = row.get(columnName)

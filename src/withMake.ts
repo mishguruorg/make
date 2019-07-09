@@ -18,12 +18,10 @@ interface Options {
 const withMake = (options: Options) => {
   const { test } = options
   test.serial.beforeEach((t) => {
-    const { transaction } = t.context
     t.context.make = (table, attributes) => {
       return make({
         table,
         context: t.context,
-        transaction,
         attributes,
       })
     }

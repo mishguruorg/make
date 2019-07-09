@@ -33,17 +33,21 @@ test.serial('should create item and account', async (t) => {
   t.is(item, ITEM)
 })
 
-test.serial('should pass a transaction', async (t) => {
-  stubAccount.resetHistory()
-  const context = {}
-  const stubTransaction: any = 'STUB'
-  await make({
-    context,
-    table: Item,
-    transaction: stubTransaction,
-  })
+test.serial(
+  'should pass a transaction if one is provided in context',
+  async (t) => {
+    stubAccount.resetHistory()
+    const stubTransaction: any = 'STUB'
+    const context = {
+      transaction: stubTransaction,
+    }
+    await make({
+      context,
+      table: Item,
+    })
 
-  stubAccount.getCalls().forEach((call) => {
-    t.deepEqual(call.lastArg, { transaction: stubTransaction })
-  })
-})
+    stubAccount.getCalls().forEach((call) => {
+      t.deepEqual(call.lastArg, { transaction: stubTransaction })
+    })
+  },
+)

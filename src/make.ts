@@ -4,15 +4,10 @@ import resolveRequiredForeignKeys from './resolveRequiredForeignKeys'
 import { MakeFn } from './types'
 
 const make: MakeFn = async (options) => {
-  const {
-    context,
-    table,
-    reuseIfPossible = false,
-    transaction,
-    attributes = {},
-  } = options
+  const { context, table, reuseIfPossible = false, attributes = {} } = options
 
   const template = autotemplate(table)
+  const { transaction } = context
 
   if (reuseIfPossible && context.hasOwnProperty(template.key)) {
     return context[template.key]
@@ -22,7 +17,6 @@ const make: MakeFn = async (options) => {
     tables: table.sequelize.models,
     context,
     template,
-    transaction,
   })
 
   const row = await table.create(

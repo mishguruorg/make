@@ -8,7 +8,10 @@ export type Table = any
 
 export type TableMap = Record<string, Table>
 
-export type Context = Record<string, any>
+export interface Context {
+  transaction?: Transaction,
+  [key: string]: any,
+}
 
 export type Attributes = Record<string, any>
 
@@ -34,6 +37,5 @@ export type MakeFn = (options: {
   context: Context,
   table: Table,
   attributes?: Attributes,
-  transaction?: Transaction,
   reuseIfPossible?: boolean,
 }) => Promise<AnyInstance>
