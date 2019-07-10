@@ -31,6 +31,10 @@ const task = await make({
 })
 ```
 
+### Transaction support
+If the test context has a `Sequalize` transaction object under the `transaction` key, `make` will automatically use it when creating entities in the database.
+While inside an active transaction, created entities will only be accessible under that transaction as well.
+
 ### With AVA Context
 
 If you are using AVA, then you can use `withMake` -- which automatically
@@ -100,7 +104,7 @@ setting up a `User` and a `Project`.
 
 ```typescript
 const context = {}
-const task = await make({context, table: db.Task })
+const task = await make({ context, table: db.Task })
 
 console.log(context)
 // { task: {...}, project: {...}, user: {...} }
