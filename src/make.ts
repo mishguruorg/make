@@ -17,6 +17,7 @@ const make: MakeFn = async (options) => {
     tables: table.sequelize.models,
     context,
     template,
+    attributes,
   })
 
   const row = await table.create(

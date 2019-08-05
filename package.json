@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/mishguruorg/make#readme",
   "devDependencies": {
-    "@mishguru/package": "7.1.0",
+    "@mishguru/package": "7.5.0",
     "@types/faker": "4.1.5",
     "@types/matcher": "2.0.0",
     "@types/sinon": "7.0.13",
