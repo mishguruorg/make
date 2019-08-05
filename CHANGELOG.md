@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.1.1
+
+- If you pass a null as an attribute value, it will not create a foreign key
+  row that value.
+
+```
+await make(db.Movie, { directorId: null })
+
+// previously would create an extra db.Director entry
+// not it does not
+```
+
 ## 2.2.0
 
 - Bugfix: Limit precision of `ContentTags.confidence`. This will fix the
