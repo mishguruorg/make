@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.1.1
+## 4.2.0
 
 - If you pass a null as an attribute value, it will not create a foreign key
   row that value.
