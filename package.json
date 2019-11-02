@@ -36,7 +36,7 @@
     "@types/matcher": "2.0.0",
     "@types/sinon": "7.0.13",
     "mysql": "2.17.1",
-    "sequelize": "3.34.0",
+    "sequelize": "5.15.1",
     "sinon": "7.3.2"
   },
   "dependencies": {
